@@ -1,0 +1,143 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/sheet.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/shop.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Theme/MiniTitleFont.tres" type="DynamicFont" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 4 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32 )
+
+[node name="Shop" type="StaticBody2D"]
+pause_mode = 2
+collision_layer = 32
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 48, 16, 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -4 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Shop" type="Label" parent="CanvasLayer/Control"]
+margin_left = 128.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 3 )
+text = "Shop"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BoughtLabel" type="Label" parent="CanvasLayer/Control"]
+margin_top = 40.0
+margin_right = 128.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 3 )
+text = "Bought"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bought" type="VBoxContainer" parent="CanvasLayer/Control"]
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToBuyLabel" type="Label" parent="CanvasLayer/Control"]
+margin_left = 192.0
+margin_top = 40.0
+margin_right = 320.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 3 )
+text = "To Buy"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToBuy" type="VBoxContainer" parent="CanvasLayer/Control"]
+margin_left = 192.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Label" parent="CanvasLayer/Control"]
+margin_left = 64.0
+margin_top = 136.0
+margin_right = 304.0
+margin_bottom = 152.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cost" type="Label" parent="CanvasLayer/Control"]
+margin_left = 64.0
+margin_top = 152.0
+margin_right = 304.0
+margin_bottom = 168.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="CanvasLayer/Control"]
+margin_left = 8.0
+margin_top = 160.0
+margin_right = 48.0
+margin_bottom = 170.0
+text = "Back"
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="pressed" from="CanvasLayer/Control/Back" to="." method="_on_Back_pressed"]
